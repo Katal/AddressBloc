@@ -10,10 +10,11 @@ class MenuController
 	def main_menu
 		puts "Main Menu - #{@address_book.entries.count} entries"
 		puts "1 - View all entries"
-		puts "2 - Create an entry"
-		puts "3 - Search for an entry"
-		puts "4 - Import entries from a CSV"
-		puts "5 - Exit"
+		puts "2 - View specific entry number #?"
+		puts "3 - Create an entry"
+		puts "4 - Search for an entry"
+		puts "5 - Import entries from a CSV"
+		puts "6 - Exit"
 		print "Enter your selection: "
 
 		selection = gets.to_i
@@ -24,17 +25,21 @@ class MenuController
 			main_menu
 		when 2
 			system "clear"
-			create_entry
+			view_entry
 			main_menu
 		when 3
 			system "clear"
-			search_entry
+			create_entry
 			main_menu
 		when 4
 			system "clear"
-			read_csv
+			search_entry
 			main_menu
 		when 5
+			system "clear"
+			read_csv
+			main_menu
+		when 6
 			puts "Good-bye!"
 			exit(0)
 		else
@@ -53,6 +58,25 @@ class MenuController
 
      	system "clear"
      	puts "End of entries"
+	end
+
+	def view_entry
+		system "clear"
+		puts "Enter entry number"
+		print "Entry #: "
+		new_input = gets.chomp
+		#how do you get index to be dynamically defined and call / connect with user input here, one time?
+		#does this need to be inside the block instead? so it is a local variable?
+
+		@address_book.entries.each_with_index do |entry, index|
+			if new_input == "#{index+1}"
+				puts entry.to_s
+				entry_submenu(entry)
+			else
+				system "clear"
+				puts "Enter valid entry number"
+			end
+		end
 	end
 	 
 	def create_entry
