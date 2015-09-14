@@ -48,9 +48,17 @@ RSpec.describe AddressBook do
 
 			expect(book.entries.size).to eq(0)
 		end
+
+		# it "returns not found" do
+		# 	book = AddressBook.new
+		# 	book.remove_entry('Bonquesha', '702.555.5555', 'bonquesha@gmail.com')
+
+		# 	expect(book.remove_entry).to return("not found")???
+		# end
 	end
 
 	describe "#import_from_csv" do
+		#do you always have to build specific tests with specific data for your programs to test?
 		it "imports the correct number of entries" do
 			book.import_from_csv("entries.csv")
 			book_size = book.entries.size
@@ -92,13 +100,36 @@ RSpec.describe AddressBook do
 	       check_entry(entry_five, "Sussie", "555-555-2036", "sussie@blocmail.com")
 	    end
 
+		it "imports the correct number of entries from second CSV" do
+			book.import_from_csv("entries_2.csv")
+			book_size = book.entries.size
+			expect(book_size).to eql 3
+		end
 
+		## COME BACK TO THIS AFTER NEXT CHECKPOINT
 
-		# it "returns not found" do
-		# 	book = AddressBook.new
-		# 	book.remove_entry('Bonquesha', '702.555.5555', 'bonquesha@gmail.com')
-
-		# 	expect(book.remove_entry).to return("not found")???
+		# it "imports the 1st entry from csv 2, the sixth entry" do
+		# 	book.import_from_csv("entries_2.csv")
+		# 	#check first entry from book 2
+		# 	entry_six = book.entries[5]
+		# 	check_entry(entry_six, "Tamara", "702-555-5555", "tammy@blocmail.com")
 		# end
+
+		# it "imports the 2nd entry from csv 2, the seventh entry in total" do
+		# 	book.import_from_csv("entries_2.csv")
+		# 	#check first entry from book 2
+		# 	entry_seven = book.entries[6]
+		# 	check_entry(entry_seven, "Ursula", "702-555-5551", "ursula@blocmail.com")
+		# end
+
+		# it "imports the 3rd entry from csv 2, the eigth entry total" do
+		# 	book.import_from_csv("entries_2.csv")
+		# 	#check first entry from book 2
+		# 	entry_eight = book.entries[7]
+		# 	check_entry(entry_eight, "Zach", "750-555-5555", "zach@blocmail.com")
+		# end
+
 	end
+
+
 end
