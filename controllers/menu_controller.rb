@@ -18,6 +18,7 @@ class MenuController
 		print "Enter your selection: "
 
 		selection = gets.to_i
+		puts selection
 		case selection
 		when 1
 			system "clear"
@@ -65,16 +66,16 @@ class MenuController
 		puts "Enter entry number"
 		print "Entry #: "
 		new_input = gets.chomp
-		#how do you get index to be dynamically defined and call / connect with user input here, one time?
-		#does this need to be inside the block instead? so it is a local variable?
 
 		@address_book.entries.each_with_index do |entry, index|
 			if new_input == "#{index+1}"
+				puts "Awesome! Found entry #{new_input}" 
 				puts entry.to_s
 				entry_submenu(entry)
 			else
-				system "clear"
-				puts "Enter valid entry number"
+				new_input != "#{index+1}"
+				puts "Bummer - Entry #{new_input} not found :("
+				main_menu
 			end
 		end
 	end
