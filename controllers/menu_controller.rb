@@ -70,20 +70,50 @@ class MenuController
 		system "clear"
 		puts "Enter entry number"
 		print "Entry #: "
-		new_input = gets.chomp
+		input = gets.chomp.to_i
+		puts input
 
 		@address_book.entries.each_with_index do |entry, index|
-			if new_input == "#{index+1}"
-				puts "Awesome! Found entry #{new_input}" 
+				puts index
+				puts input
+				puts "-----"
+			if (index + 1) == input
+				puts "Awesome! Found entry #{input}" 
 				puts entry.to_s
 				entry_submenu(entry)
 			else
-				new_input != "#{index+1}"
-				puts "Bummer - Entry #{new_input} not found :("
-				main_menu
+				puts "Bummer - Entry #{input} not found :("
 			end
+
 		end
+
+		main_menu
+
 	end
+
+	# def search_entries
+	# 	print "Search by name: "
+ #     	name = gets.chomp
+ #     	match = @address_book.binary_search(name)
+ #     	system "clear"
+
+	#      if match
+	#        puts match.to_s
+	#        search_submenu(match)
+	#      else
+	#        puts "No match found for #{name}"
+	#      end
+
+	# def iterative_search(name)
+ #   		@entries.each do |entry|
+ #   			if name == entry.name
+ #   				return entry
+ #   			end
+ #   		end
+   		
+ #   		return nil
+
+ #   	end
 	 
 	def create_entry
 		system "clear"
@@ -101,17 +131,17 @@ class MenuController
 	    puts "New entry created"
 	end
 	 
-	def search_entries
+	def search_entry
 		print "Search by name: "
      	name = gets.chomp
-     	match = @address_book.binary_search(name)
+     	match = @address_book.iterative_search(name)
      	system "clear"
 
 	     if match
 	       puts match.to_s
 	       search_submenu(match)
 	     else
-	       puts "No match found for #{name}"
+	       puts "No match found for #{name}. Make sure your entry is correctly spelled and capitalized." 
 	     end
 	end
 	 
@@ -172,6 +202,7 @@ class MenuController
  
      case selection
      when "n"
+     	#how does n have no code here and work??
      when "d"
      	 delete_entry(entry)
      when "e"
